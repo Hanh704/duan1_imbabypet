@@ -17,7 +17,7 @@ function uploadFile($file) {
         $fileName = uniqid() . '-' . pathinfo($file['name'], PATHINFO_FILENAME) . '.' . pathinfo($file['name'], PATHINFO_EXTENSION);
         
         // Đường dẫn lưu file
-        $uploadDir = __DIR__ . '/../assets/images/'; // Đường dẫn tuyệt đối đến admin/assets/images
+        $uploadDir = __DIR__ . '/../assets/images/products/'; // Đường dẫn tuyệt đối đến admin/assets/images
         $uploadFilePath = $uploadDir . $fileName;
 
         // Kiểm tra quyền ghi thư mục
