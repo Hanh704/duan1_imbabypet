@@ -2,7 +2,7 @@
     <!-- LOGO -->
     <div class="navbar-brand-box">
         <!-- Dark Logo-->
-        <a href="index.html" class="logo logo-dark">
+        <a href="?act=/" class="logo logo-dark">
             <span class="logo-sm">
                 <img src="assets/images/logo-sm.png" alt="" height="22">
             </span>
@@ -11,13 +11,12 @@
             </span>
         </a>
         <!-- Light Logo-->
-        <a href="index.html" class="logo logo-light">
+        <a href="?act=/" class="logo logo-light">
             <span class="logo-sm">
                 <img src="assets/images/logo-sm.png" alt="" height="22">
             </span>
             <span class="logo-lg">
-                <a href="?act=/"><img src="assets/images/logo_pet_png.png" alt="" height="80"></a>
-            </span>
+                <img src="assets/images/logo_pet_png.png" alt="" height="80">            </span>
         </a>
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
             <i class="ri-record-circle-line"></i>
@@ -56,7 +55,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarProduct" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">
-                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Danh mục sản phẩm</span>
+                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Sản phẩm</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarProduct">
                         <ul class="nav nav-sm flex-column">
@@ -76,18 +75,23 @@
 
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarCategory" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">
-                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Quản lý danh mục</span>
+                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Danh mục</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarCategory">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="?act=product" class="nav-link" data-key="t-sweet-alerts">
+                                <a href="?act=category" class="nav-link" data-key="t-sweet-alerts">
                                     Danh sách danh mục
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="?act=product/create" class="nav-link" data-key="t-nestable-list">
+                                <a href="?act=category/create" class="nav-link" data-key="t-nestable-list">
                                     Thêm mới danh mục
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="?act=category/create" class="nav-link" data-key="t-nestable-list">
+                                    Danh sách màu sắc
                                 </a>
                             </li>
                         </ul>
@@ -96,7 +100,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarAccount" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">
-                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Quản lý tài khoản</span>
+                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Tài khoản</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarAccount">
                         <ul class="nav nav-sm flex-column">
@@ -113,7 +117,7 @@
                         </ul>
                     </div>
                 </li>
-                
+
                 <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Bán hàng</span></li>
 
             </ul>

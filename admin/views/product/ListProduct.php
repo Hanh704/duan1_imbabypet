@@ -66,7 +66,7 @@
                         </thead>
                         <tbody>
                             <?php
-                            foreach ($products as $product) {
+                            foreach ($productsOnPage as $product) {
                             ?>
                                 <tr>
                                     <td>
@@ -116,25 +116,22 @@
                 <div class="align-items-center mt-4 pt-2 justify-content-between row text-center text-sm-start">
                     <div class="col-sm">
                         <div class="text-muted">
-                            Showing <span class="fw-semibold">5</span> of <span class="fw-semibold">25</span> Results
+                            Showing <span class="fw-semibold"><?php echo min($perPage, $totalProducts - $startIndex) ?></span> of 
+                            <span class="fw-semibold"><?php echo $totalProducts ?></span> Results
                         </div>
                     </div>
-                    <div class="col-sm-auto  mt-3 mt-sm-0">
+                    <div class="col-sm-auto mt-3 mt-sm-0">
                         <ul class="pagination pagination-separated pagination-sm mb-0 justify-content-center">
-                            <li class="page-item disabled">
-                                <a href="#" class="page-link">←</a>
+                            <li class="page-item <?php echo $currentPage == 1 ? 'disabled' : '' ?>">
+                                <a href="?act=product&page=<?php echo $currentPage - 1 ?>" class="page-link">←</a>
                             </li>
-                            <li class="page-item">
-                                <a href="#" class="page-link">1</a>
-                            </li>
-                            <li class="page-item active">
-                                <a href="#" class="page-link">2</a>
-                            </li>
-                            <li class="page-item">
-                                <a href="#" class="page-link">3</a>
-                            </li>
-                            <li class="page-item">
-                                <a href="#" class="page-link">→</a>
+                            <?php for ($i = 1; $i <= $totalPages; $i++) { ?>
+                                <li class="page-item <?php echo $currentPage == $i ? 'active' : '' ?>">
+                                    <a href="?act=product&page=<?php echo $i ?>" class="page-link"><?php echo $i ?></a>
+                                </li>
+                            <?php } ?>
+                            <li class="page-item <?php echo $currentPage == $totalPages ? 'disabled' : '' ?>">
+                                <a href="?act=product&page=<?php echo $currentPage + 1 ?>" class="page-link">→</a>
                             </li>
                         </ul>
                     </div>

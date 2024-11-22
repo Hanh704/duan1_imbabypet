@@ -14,6 +14,26 @@ class ProductController {
     public function index() {
         $products = $this->productModel->getAllProducts();
 
+        // Số sản phẩm hiển thị mỗi trang
+        $perPage = 5;
+
+        // Tổng số sản phẩm
+        $totalProducts = count($products);
+
+        // Tính số trang
+        $totalPages = ceil($totalProducts / $perPage);
+
+        // Lấy trang hiện tại từ query string (mặc định là 1 nếu không có)
+        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $currentPage = max(1, min($totalPages, $currentPage));
+
+        // Tính chỉ số bắt đầu và kết thúc sản phẩm trên trang hiện tại
+        $startIndex = ($currentPage - 1) * $perPage;
+        $endIndex = min($startIndex + $perPage, $totalProducts);
+
+        // Lấy danh sách sản phẩm cho trang hiện tại
+        $productsOnPage = array_slice($products, $startIndex, $perPage);
+        
         require_once __DIR__ . '/../views/product/listProduct.php';
     }
 

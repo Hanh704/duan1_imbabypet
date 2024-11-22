@@ -85,6 +85,13 @@
             $stmt->execute([$MaSP]);
         }
 
+        public function getProductByCategory($MaLoai){
+            $sql = "SELECT * FROM SanPham WHERE MaLoai = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$MaLoai]);
+            return $stmt->fetchALl();
+        }
+
 
 
         

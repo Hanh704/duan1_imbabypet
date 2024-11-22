@@ -10,6 +10,7 @@ require_once '../commons/function.php'; // Hàm hỗ trợ
 // Require toàn bộ file Controllers
 require_once 'controllers/DashboardController.php';
 require_once 'controllers/ProductController.php';
+require_once 'controllers/CategoryController.php';
 
 // Require toàn bộ file Models
 
@@ -28,6 +29,15 @@ match ($act) {
     'product/edit'         => (new ProductController())->edit(),
     'product/update'       => (new ProductController())->update($_GET['MaSP']),
     'product/delete'       => (new ProductController())->delete($_GET['MaSP']),
+
+    //category
+    'category'          => (new CategoryController())->index(),
+    'category/create'   => (new CategoryController())->create(),
+    'category/edit'     => (new CategoryController())->edit(),
+    'category/update'   => (new CategoryController())->update($_GET['MaLoai']),
+    'category/delete'   => (new CategoryController())->delete($_GET['MaLoai']),
+
+    'category/show_products' => (new CategoryController())->showProductByCategory($_GET['MaLoai']),
 
 
 };
