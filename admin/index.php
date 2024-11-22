@@ -25,6 +25,9 @@ match ($act) {
     //product
     'product'           => (new ProductController())->index(),
     'product/create'       => (new ProductController())->create(),
+    'product/edit'         => (new ProductController())->edit(),
+    'product/update'       => (new ProductController())->update($_GET['MaSP']),
+    'product/delete'       => (new ProductController())->delete($_GET['MaSP']),
 
 
 };

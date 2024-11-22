@@ -16,7 +16,7 @@
                 <img src="assets/images/logo-sm.png" alt="" height="22">
             </span>
             <span class="logo-lg">
-                <img src="assets/images/logo-light.png" alt="" height="17">
+                <a href="?act=/"><img src="assets/images/logo_pet_png.png" alt="" height="80"></a>
             </span>
         </a>
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
@@ -29,7 +29,7 @@
             <span class="d-flex align-items-center gap-2">
                 <img class="rounded header-profile-user" src="assets/images/users/avatar-1.jpg" alt="Header Avatar">
                 <span class="text-start">
-                    <span class="d-block fw-medium sidebar-user-name-text">Anna Adame</span>
+                    <span class="d-block fw-medium sidebar-user-name-text">Dương Duy</span>
                     <span class="d-block fs-14 sidebar-user-name-sub-text"><i class="ri ri-circle-fill fs-10 text-success align-baseline"></i> <span class="align-middle">Online</span></span>
                 </span>
             </span>
@@ -50,30 +50,70 @@
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="menu-title"><span data-key="t-menu">Quản lý</span></li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#">
+                    <a class="nav-link menu-link" href="?act=/">
                         <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboards</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarDanhMuc" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">
+                    <a class="nav-link menu-link" href="#sidebarProduct" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">
                         <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Danh mục sản phẩm</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarDanhMuc">
+                    <div class="collapse menu-dropdown" id="sidebarProduct">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a href="?act=product" class="nav-link" data-key="t-sweet-alerts">
-                                    Danh sách
+                                    Danh sách sản phẩm
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="?act=product/create" class="nav-link" data-key="t-nestable-list">
-                                    Thêm mới
+                                    Thêm mới sản phẩm
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarCategory" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">
+                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Quản lý danh mục</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarCategory">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="?act=product" class="nav-link" data-key="t-sweet-alerts">
+                                    Danh sách danh mục
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="?act=product/create" class="nav-link" data-key="t-nestable-list">
+                                    Thêm mới danh mục
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarAccount" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">
+                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Quản lý tài khoản</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarAccount">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="?act=product" class="nav-link" data-key="t-sweet-alerts">
+                                    Danh sách tài khoản
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="?act=product/create" class="nav-link" data-key="t-nestable-list">
+                                    Quản lý bình luận
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                
                 <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Bán hàng</span></li>
 
             </ul>
