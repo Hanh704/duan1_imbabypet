@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../../../../AdminLTE-3.2.0"
+		},
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "../../../../../../Users/admin/Downloads/templateClient/corano"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "AdminLTE-3.2.0"
+	}
+}
