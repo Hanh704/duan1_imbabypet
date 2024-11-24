@@ -28,16 +28,16 @@
             <span class="d-flex align-items-center gap-2">
                 <img class="rounded header-profile-user" src="assets/images/users/avatar-1.jpg" alt="Header Avatar">
                 <span class="text-start">
-                    <span class="d-block fw-medium sidebar-user-name-text">Dương Duy</span>
+                    <span class="d-block fw-medium sidebar-user-name-text"><?php echo $_SESSION['HoTen']; ?></span>
                     <span class="d-block fs-14 sidebar-user-name-sub-text"><i class="ri ri-circle-fill fs-10 text-success align-baseline"></i> <span class="align-middle">Online</span></span>
                 </span>
             </span>
         </button>
         <div class="dropdown-menu dropdown-menu-end">
             <!-- item-->
-            <h6 class="dropdown-header">Welcome Anna!</h6>
+            <h6 class="dropdown-header"><?php echo $_SESSION['HoTen']; ?></h6>
             <a class="dropdown-item" href="pages-profile.html"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Profile</span></a>
-            <a class="dropdown-item" href="auth-logout-basic.html"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Logout</span></a>
+            <a class="dropdown-item" href="?act=admin/logout"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Đăng Xuất</span></a>
         </div>
     </div>
     <div id="scrollbar">
@@ -105,13 +105,13 @@
                     <div class="collapse menu-dropdown" id="sidebarAccount">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="?act=product" class="nav-link" data-key="t-sweet-alerts">
+                                <a href="?act=admin" class="nav-link" data-key="t-sweet-alerts">
                                     Danh sách tài khoản
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="?act=product/create" class="nav-link" data-key="t-nestable-list">
-                                    Quản lý bình luận
+                                <a href="?act=orders" class="nav-link" data-key="t-nestable-list">
+                                    Quản lý đơn hàng
                                 </a>
                             </li>
                         </ul>
