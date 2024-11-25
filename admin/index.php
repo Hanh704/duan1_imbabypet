@@ -1,99 +1,119 @@
-<?php 
-session_start();
-// Require file Common
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+session_start(); // Bắt đầu session
+
+// Require các file cần thiết
 require_once '../commons/env.php'; // Khai báo biến môi trường
 require_once '../commons/function.php'; // Hàm hỗ trợ
-// Require toàn bộ file Controllers
-require_once './controllers/AdminDanhMucController.php';
-require_once './controllers/AdminSanPhamController.php';
-require_once './controllers/AdminDonHangController.php';
-require_once './controllers/AdminBaoCaoThongKeController.php';
-require_once './controllers/AdminTaiKhoanController.php'; 
+require_once 'controllers/DashboardController.php';
+require_once 'controllers/ProductController.php';
+require_once 'controllers/CategoryController.php';
+require_once 'controllers/AdminController.php';
+require_once 'controllers/OrderController.php';
 
+// Hàm bảo vệ (Middleware)
+function protect(callable $callback) {
+    if (!isset($_SESSION['MaAdmin']) || $_SESSION['MaQuyen'] != 1) {
+        header("Location: ?act=admin/loginForm&error=Vui lòng đăng nhập trước!");
+        exit;
+    }
+    return $callback();
+}
 
-// // Require toàn bộ file Models
-// require_once './models/Student.php';
-// require_once './models/SanPham.php';
+// Require toàn bộ file Models
 require_once './models/AdminDanhMuc.php';
 require_once './models/AdminSanPham.php';
 require_once './models/AdminDonHang.php';
 require_once './models/AdminTaiKhoan.php';
+
 // Route
 $act = $_GET['act'] ?? '/';
 
-// Để bảo bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
+switch ($act) {
+    // Route không yêu cầu đăng nhập
+    case 'admin/loginForm':
+        (new AdminController())->loginForm();
+        break;
+    case 'admin/login':
+        (new AdminController())->login();
+        break;
+    case 'admin/logout':
+        (new AdminController())->logout();
+        break;
 
-if($act !=='login-admin' && $act !=='check-login-admin' && $act !=='logout-admin') {
-  checkLoginAdmin();
+    // Route yêu cầu đăng nhập
+    case '/':
+        protect(fn() => (new DashboardController())->index());
+        break;
+    case 'product':
+        protect(fn() => (new ProductController())->index());
+        break;
+    case 'product/create':
+        protect(fn() => (new ProductController())->create());
+        break;
+    case 'product/edit':
+        protect(fn() => (new ProductController())->edit());
+        break;
+    case 'product/update':
+        protect(fn() => (new ProductController())->update($_GET['MaSP']));
+        break;
+    case 'product/delete':
+        protect(fn() => (new ProductController())->delete($_GET['MaSP']));
+        break;
+
+    // Cate
+    case 'category':
+        protect(fn() => (new CategoryController())->index());
+        break;
+    case 'category/create':
+        protect(fn() => (new CategoryController())->create());
+        break;
+    case 'category/edit':
+        protect(fn() => (new CategoryController())->edit());
+        break;
+    case 'category/update':
+        protect(fn() => (new CategoryController())->update($_GET['MaLoai']));
+        break;
+    case 'category/delete':
+        protect(fn() => (new CategoryController())->delete($_GET['MaLoai']));
+        break;
+
+    // Admin
+    case 'admin':
+        protect(fn() => (new AdminController())->index());
+        break;
+    case 'admin/create':
+        protect(fn() => (new AdminController())->create());
+        break;
+    case 'admin/edit':
+        protect(fn() => (new AdminController())->edit($_GET['MaAdmin']));
+        break;
+    case 'admin/update':
+        protect(fn() => (new AdminController())->update($_GET['MaAdmin']));
+        break;
+    case 'admin/delete':
+        protect(fn() => (new AdminController())->delete($_GET['MaAdmin']));
+        break;
+
+    // Đơn đặt hàng
+    case 'orders':
+        protect(fn() => (new OrderController())->index());
+        break;
+    case 'order/view':
+        protect(fn() => (new OrderController())->view($_GET['MaDH']));
+        break;
+    case 'order/delete':
+        protect(fn() => (new OrderController())->delete($_GET['MaDH']));
+        break;
+    case 'order/updateStatus':
+        (new OrderController())->updateStatus();
+        break;
+
+    default:
+        // Xử lý nếu không có route nào khớp
+        echo "Trang không tồn tại!";
+        break;
 }
-
-match ($act){
-  // route báo cáo
-    '/' =>(new AdminBaoCaoThongKeController())->home(),
-
-  // route danh mục
-    'danh-muc' =>(new AdminDanhMucController())->danhSachDanhMuc(),
-    'from-them-danh-muc' =>(new AdminDanhMucController())->formAddDanhMuc(),
-    'them-danh-muc' =>(new AdminDanhMucController())->postAddDanhMuc(),
-    'from-sua-danh-muc' =>(new AdminDanhMucController())->formEditDanhMuc(),
-    'sua-danh-muc' =>(new AdminDanhMucController())->postEditDanhMuc(),
-    'xoa-danh-muc' =>(new AdminDanhMucController())->deleteDanhMuc(),
-// route sản phẩm
-
-'san-pham' =>(new AdminSanPhamController())->danhSachSanPham(),
-'from-them-san-pham' =>(new AdminSanPhamController())->formAddSanPham(),
-'them-san-pham' =>(new AdminSanPhamController())->postAddSanPham(),
-'from-sua-san-pham' =>(new AdminSanPhamController())->formEditSanPham(),
-'sua-san-pham' =>(new AdminSanPhamController())->postEditSanPham(),
-'sua-album-anh-san-pham' =>(new AdminSanPhamController())->postEditAnhSanPham(),
-
-'xoa-san-pham' =>(new AdminSanPhamController())->deleteSanPham(),
-
-'chi-tiet-san-pham' =>(new AdminSanPhamController())->detailSanPham(),
-// bình luận
-'update-trang-thai-binh-luan' =>(new AdminSanPhamController())->updateTrangThaiBinhLuan(),
-
-
-// route đơn hàng
-'don-hang' =>(new AdminDonHangController())->danhSachDonHang(),
-
-'from-sua-don-hang' =>(new AdminDonHangController())->formEditDonHang(),
-'sua-don-hang' =>(new AdminDonHangController())->postEditDonHang(),
-
-'chi-tiet-don_hang' =>(new AdminDonHangController())->detailDonHang(),
-
-// route quản lí tk
-
-'list-tai-khoan-quan-tri' =>(new AdminTaiKhoanController())->danhSachQuanTri(),
-'form-them-quan-tri' =>(new AdminTaiKhoanController())->formAddQuanTri(),
-'them-quan-tri' =>(new AdminTaiKhoanController())->postAddQuanTri(),
-'from-sua-quan-tri' =>(new AdminTaiKhoanController())->formEditQuanTri(),
-'sua-quan-tri' =>(new AdminTaiKhoanController())->postEditQuanTri(),
-
-'reset-password' =>(new AdminTaiKhoanController())->resetPassword(),
-
-// khách hàng
-'list-tai-khoan-khach-hang' =>(new AdminTaiKhoanController())->danhSachKhachHang(),
-  
-'from-sua-khach-hang' =>(new AdminTaiKhoanController())->formEditKhachHang(),
-'sua-khach-hang' =>(new AdminTaiKhoanController())->postEditKhachHang(),  
-'chi-tiet-khach-hang' =>(new AdminTaiKhoanController())->detailKhachHang(),
-
-// cá nhân 
-
-'form-sua-thong-tin-ca-nhan-quan-tri' =>(new AdminTaiKhoanController())->formEditCaNhanQuanTri(),
-'sua-thong-tin-ca-nhan-quan-tri' =>(new AdminTaiKhoanController())->postEditCaNhanQuanTri(),
-'sua-mat-khau-ca-nhan-quan-tri' =>(new AdminTaiKhoanController())->postEditMatKhauCaNhan(),
-
-
-
-
-
-// đăng nhập
-'login-admin' =>(new AdminTaiKhoanController())->formLogin(),
-'check-login-admin' =>(new AdminTaiKhoanController())->login(),
-'logout-admin' =>(new AdminTaiKhoanController())->logout(),
-
-
-};
-?> 
